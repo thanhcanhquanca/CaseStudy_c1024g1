@@ -78,6 +78,19 @@ public class BookingManager implements IBookingManager {
 
     @Override
     public void cancelBooking(String idBooking) {
+        Booking bookingToRemove = null;
+        for (Booking booking : bookings) {
+            if (booking.getIdBooking().equals(idBooking)) {
+                bookingToRemove = booking;
+                break;
+            }
+        }
+        if (bookingToRemove != null) {
+            bookings.remove(bookingToRemove);
+            System.out.println("Hủy đặt phòng thành công: " + idBooking);
+        } else {
+            System.out.println("Không tìm thấy mã đặt phòng: " + idBooking);
+        }
 
     }
 }

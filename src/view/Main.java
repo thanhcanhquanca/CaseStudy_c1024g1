@@ -42,5 +42,9 @@ public class Main {
                 System.out.println(booking);
             }
 
+            bookingManager.cancelBooking("B001s");
+
+
+
         }
 }

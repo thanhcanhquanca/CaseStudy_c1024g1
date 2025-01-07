@@ -2,6 +2,7 @@ package view;
 
 import controller.BookingManager;
 import controller.CustomerManager;
+import controller.InvoiceManager;
 import controller.RoomManager;
 import model.Booking;
 import model.Customer;
@@ -44,7 +45,10 @@ public class Main {
 
             bookingManager.cancelBooking("B001s");
 
+            InvoiceManager invoiceManager = new InvoiceManager(bookingManager);
 
+            double totalRevenue = invoiceManager.calculateTotalRevenue();
+            System.out.println("Tổng doanh thu từ tất cả đặt phòng: " + totalRevenue);
 
         }
 }

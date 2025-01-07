@@ -3,11 +3,11 @@ package model;
 import java.time.LocalDate;
 public class Invoice {
     private String invoiceID;
-    private int bookingID;
+    private String bookingID;
     private LocalDate issueDate;
     private double totalAmount;
 
-    public Invoice(String invoiceID, int bookingID, LocalDate issueDate, double totalAmount) {
+    public Invoice(String invoiceID, String bookingID, LocalDate issueDate, double totalAmount) {
         this.invoiceID = invoiceID;
         this.bookingID = bookingID;
         this.issueDate = issueDate;
@@ -22,11 +22,11 @@ public class Invoice {
         this.invoiceID = invoiceID;
     }
 
-    public int getBookingID() {
+    public String getBookingID() {
         return bookingID;
     }
 
-    public void setBookingID(int bookingID) {
+    public void setBookingID(String bookingID) {
         this.bookingID = bookingID;
     }
 

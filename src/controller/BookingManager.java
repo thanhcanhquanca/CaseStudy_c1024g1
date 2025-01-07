@@ -93,4 +93,9 @@ public class BookingManager implements IBookingManager {
         }
 
     }
+
+    public List<Booking> getAllBookings() {
+        return new ArrayList<>(bookings); // Trả về một bản sao của danh sách bookings
+    }
+
 }

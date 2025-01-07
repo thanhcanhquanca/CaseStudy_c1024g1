@@ -44,4 +44,14 @@ public class Room {
     public void setStatus(boolean status) {
         isStatus = status;
     }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomId='" + roomId + '\'' +
+                ", type='" + type + '\'' +
+                ", pricePerDay=" + pricePerDay +
+                ", isStatus=" + isStatus +
+                '}';
+    }
 }

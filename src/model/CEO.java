@@ -16,4 +16,11 @@ public class CEO extends Person{
     public void setPosition(String position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return "CEO{" +
+                "position='" + position + '\'' +
+                '}';
+    }
 }

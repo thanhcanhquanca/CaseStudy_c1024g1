@@ -45,4 +45,14 @@ public class Invoice {
     public void setTotalAmount(double totalAmount) {
         this.totalAmount = totalAmount;
     }
+
+    @Override
+    public String toString() {
+        return "Invoice{" +
+                "invoiceID='" + invoiceID + '\'' +
+                ", bookingID=" + bookingID +
+                ", issueDate=" + issueDate +
+                ", totalAmount=" + totalAmount +
+                '}';
+    }
 }

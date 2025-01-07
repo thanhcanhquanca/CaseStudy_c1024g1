@@ -1,6 +1,7 @@
 package model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Booking {
     private String idBooking;
@@ -9,7 +10,6 @@ public class Booking {
     private LocalDate checkInDate;
     private LocalDate checkOutDate;
     private double totalPrice;
-
 
     public Booking(String idBooking, String customerID, String roomId, LocalDate checkInDate, LocalDate checkOutDate, double totalPrice) {
         this.idBooking = idBooking;

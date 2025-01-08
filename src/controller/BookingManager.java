@@ -21,37 +21,43 @@ public class BookingManager implements IBookingManager {
 
     @Override
     public void addBooking(Booking booking) {
-        Customer customer = customerManager.searchById(booking.getCustomerID());
-        Room room = roomManager.searchById(booking.getRoomId());
 
-        if (customer == null) {
-            System.out.println("Khách hàng không tồn tại");
-            return;
+        try {
+            Customer customer = customerManager.searchById(booking.getCustomerID());
+            Room room = roomManager.searchById(booking.getRoomId());
 
+            if (customer == null) {
+                System.out.println("Khách hàng không tồn tại");
+                return;
+
+            }
+            if (room == null) {
+                System.out.println("Phòng không tồn tại .");
+                return;
+            }
+
+            if (room.isStatus()){
+                System.out.println("phòng đã được đặt");
+                return;
+            }
+
+            long daysStayed = ChronoUnit.DAYS.between(booking.getCheckInDate(), booking.getCheckOutDate());
+            if (daysStayed <= 0){
+                System.out.println("ngày đặt phòng không hợp lệ ");
+                return;
+            }
+
+            int pricePerDay = room.getType().getPrice();
+            booking.setTotalPrice(daysStayed * pricePerDay);
+
+            bookings.add(booking);
+            room.setStatus(true);
+            System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
+
+
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
-        if (room == null) {
-            System.out.println("Phòng không tồn tại .");
-            return;
-        }
-
-        if (room.isStatus()){
-            System.out.println("phòng đã được đặt");
-            return;
-        }
-
-        long daysStayed = ChronoUnit.DAYS.between(booking.getCheckInDate(), booking.getCheckOutDate());
-        if (daysStayed <= 0){
-            System.out.println("ngày đặt phòng không hợp lệ ");
-             return;
-        }
-
-        int pricePerDay = room.getType().getPrice();
-        booking.setTotalPrice(daysStayed * pricePerDay);
-
-        bookings.add(booking);
-        room.setStatus(true);
-        System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
-
 
     }
 

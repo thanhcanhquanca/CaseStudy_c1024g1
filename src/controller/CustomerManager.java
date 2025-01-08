@@ -4,6 +4,7 @@ import model.Customer;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -15,10 +16,12 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
 
     private boolean validateId(String id){
+
         return Pattern.matches(ID_REGEX, id);
     }
 
     public boolean validateEmail(String email){
+
         return Pattern.matches(EMAIL_REGEX, email);
     }
 
@@ -29,54 +32,68 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
 
     @Override
     public void add(Customer item) {
-        if (!validateId(item.getIdCustomer())){
-            System.out.println("ID không hợp lệ , ID phải từ 5 - 10 ký tự chỉ chứa chữ và số");
-        return;
-        }
-
-        if (!validateEmail(item.getEmailCustomer())){
-            System.out.println("email không hợp lệ , vui lòng nhập email đúng định dạng");
-        return;
-        }
-
-        for (Customer customer : customers) {
-            if (customer.getIdCustomer().equals(item.getIdCustomer())) {
-                System.out.println(" khách hàng đã tồn tại " + item.getIdCustomer() + "đã tồn tại") ;
+        try {
+            if (!validateId(item.getIdCustomer())){
+                System.out.println("ID không hợp lệ , ID phải từ 5 - 10 ký tự chỉ chứa chữ và số");
                 return;
             }
-        }
 
-        customers.add(item);
-        System.out.println("thêm khách hàng thành công" + item.getIdCustomer());
+            if (!validateEmail(item.getEmailCustomer())){
+                System.out.println("email không hợp lệ , vui lòng nhập email đúng định dạng");
+                return;
+            }
+
+            for (Customer customer : customers) {
+                if (customer.getIdCustomer().equals(item.getIdCustomer())) {
+                    System.out.println(" khách hàng đã tồn tại " + item.getIdCustomer() + "đã tồn tại") ;
+                    return;
+                }
+            }
+
+            customers.add(item);
+            System.out.println("thêm khách hàng thành công" + item.getIdCustomer());
+
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void delete(String id) {
-        boolean found = false;
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getIdCustomer().equals(id)) {
-                customers.remove(i);
-                found = true;
-                break;
+            try {
+                boolean found = false;
+                for (int i = 0; i < customers.size(); i++) {
+                    if (customers.get(i).getIdCustomer().equals(id)) {
+                        customers.remove(i);
+                        found = true;
+                        break;
+                    }
+
+                }
+                if(found){
+                    System.out.println("xóa thành công " + id);
+                }else {
+                    System.out.println(" không thể tìm thấy người dùng " + id);
+                }
+            }catch (Exception e) {
+                System.out.println("Đã xảy ra lỗi trong quá trình xóa: " + e.getMessage());
             }
 
-        }
-        if(found){
-            System.out.println("xóa thành công " + id);
-        }else {
-            System.out.println(" không thể tìm thấy người dùng " + id);
-        }
-    }
+         }
 
     @Override
     public void update(Customer item) {
-        for (int i = 0; i < customers.size(); i++) {
-            if (customers.get(i).getIdCustomer().equals(item.getIdCustomer())) {
-                customers.set(i,item);
-                return;
+            try {
+                for (int i = 0; i < customers.size(); i++) {
+                    if (customers.get(i).getIdCustomer().equals(item.getIdCustomer())) {
+                        customers.set(i,item);
+                        return;
+                    }
+                }
+                System.out.println("Không tìm thấy khách hàng với ID: " + item.getIdCustomer());
+            }catch (Exception e){
+                System.out.println("Lỗi " + e.getMessage());
             }
-        }
-        System.out.println("Không tìm thấy khách hàng với ID: " + item.getIdCustomer());
     }
 
     @Override
@@ -88,6 +105,7 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
                 return o1.getIdCustomer().compareTo(o2.getIdCustomer());
             }
         });
+
     }
 
     @Override
@@ -109,7 +127,7 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
     }
 
     @Override
-    public void writeToFile() {
+    public void writeToFile() throws IOException {
         File file = new File("customers.txt");
         try (FileOutputStream fileOutputStream = new FileOutputStream(file);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {

@@ -80,12 +80,14 @@ public class RoomManager implements GenericManager<Room>{
     }
 
     @Override
-    public void readFromFile(String fileName) throws IOException {
+    public void readFromFile() {
 
     }
 
     @Override
-    public void writeToFile(String fileName) throws ClassNotFoundException, IOException {
+    public void writeToFile() {
 
     }
+
+
 }

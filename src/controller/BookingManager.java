@@ -4,7 +4,6 @@ import model.Booking;
 import model.Customer;
 import model.Room;
 
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -49,10 +48,40 @@ public class BookingManager implements IBookingManager {
         booking.setTotalPrice(daysStayed * room.getPricePerDay());
         bookings.add(booking);
         room.setStatus(true);
-        System.out.println("đặt phòng thành công ! Tổng Tiền :" + booking.getTotalPrice());
+        System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
 
 
     }
+
+
+
+    @Override
+    public void cancelBooking(String idBooking) {
+        Booking bookingToRemove = null;
+        for (Booking booking : bookings) {
+            if (booking.getIdBooking().equals(idBooking)) {
+                bookingToRemove = booking;
+                break;
+            }
+        }
+        if (bookingToRemove != null) {
+            Room room = roomManager.searchById(bookingToRemove.getRoomId());
+            if (room != null) {
+                room.setStatus(false);
+            }
+
+            bookings.remove(bookingToRemove);
+            System.out.println("Hủy đặt phòng thành công: " + idBooking);
+        } else {
+            System.out.println("Không tìm thấy mã đặt phòng: " + idBooking);
+        }
+
+    }
+
+    public List<Booking> getAllBookings() {
+        return new ArrayList<>(bookings);
+    }
+
 
     @Override
     public List<Booking> getBookingsByCustomer(String customerId) {
@@ -74,28 +103,6 @@ public class BookingManager implements IBookingManager {
                 System.out.println(booking);
             }
         }
-    }
-
-    @Override
-    public void cancelBooking(String idBooking) {
-        Booking bookingToRemove = null;
-        for (Booking booking : bookings) {
-            if (booking.getIdBooking().equals(idBooking)) {
-                bookingToRemove = booking;
-                break;
-            }
-        }
-        if (bookingToRemove != null) {
-            bookings.remove(bookingToRemove);
-            System.out.println("Hủy đặt phòng thành công: " + idBooking);
-        } else {
-            System.out.println("Không tìm thấy mã đặt phòng: " + idBooking);
-        }
-
-    }
-
-    public List<Booking> getAllBookings() {
-        return new ArrayList<>(bookings); // Trả về một bản sao của danh sách bookings
     }
 
 }

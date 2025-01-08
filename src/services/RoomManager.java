@@ -1,6 +1,5 @@
-package controller;
+package services;
 
-import model.Customer;
 import model.Room;
 
 import java.io.*;

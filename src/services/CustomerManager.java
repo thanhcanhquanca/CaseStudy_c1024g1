@@ -1,10 +1,8 @@
-package controller;
+package services;
 
 import model.Customer;
-
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -98,6 +96,7 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
 
     @Override
     public void sort() {
+
         customers.sort(new Comparator<Customer>() {
             @Override
             public int compare(Customer o1, Customer o2) {
@@ -127,7 +126,7 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
     }
 
     @Override
-    public void writeToFile() throws IOException {
+    public void writeToFile() {
         File file = new File("customers.txt");
         try (FileOutputStream fileOutputStream = new FileOutputStream(file);
              ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {

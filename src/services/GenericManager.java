@@ -1,6 +1,5 @@
-package controller;
+package services;
 
-import java.io.IOException;
 import java.util.List;
 
 public interface GenericManager<T> {

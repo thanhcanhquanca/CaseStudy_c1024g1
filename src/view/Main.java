@@ -1,5 +1,7 @@
 package view;
 
+import notify.INotifier;
+import notify.NotifierManager;
 import services.*;
 import enums.RoomType;
 import model.*;
@@ -14,6 +16,17 @@ public class Main {
             CEO ceo1 = CEO.getInstance("34","NGưu",45,"email@Ggmail.com","897398323","Giám đốc", "quản lý toàn bộ ");
             System.out.println(ceo);
             System.out.println(ceo1);
+
+
+            INotifier notifier = new NotifierManager();
+            IGenericEmployeeManager employeeManager = new EmployeeManager(notifier);
+
+            Employee employee1 = new Employee("1", "John Doe", 30, "john@example.com", "123456789", "IT", "Developer");
+            Employee employee2 = new Employee("2", "Jane Doe", 28, "jane@example.com", "987654321", "HR", "Manager");
+
+            employeeManager.addEmployee(employee1);
+            employeeManager.addEmployee(employee2);
+            employeeManager.notifyAllEmployees("Cập nhật mới từ hệ thống!");
 
             // khách hàng  có regex
             CustomerManager customerManager = new CustomerManager();
@@ -63,13 +76,10 @@ public class Main {
             System.out.println("Tổng doanh thu từ tất cả đặt phòng: " + totalRevenue);
 
 
-            // nhân viên
-            Employee employee = new Employee("2", "Jane Smith", 30, "employee@company.com", "987654321", "Sales", "Manager");
-            Employee employee1 = new Employee("3", "BRdmith", 10, "emplosde@company.com", "987654321", "Sales", "Manager");
 
             // Yêu cầu báo cáo doanh thu từ Employee, sau đó gửi cho CEO
             ManagerReportable managerReportable = new ManagerReportable();
-            managerReportable.requestTotalRevenue(employee,ceo,invoiceManager);
+            managerReportable.requestTotalRevenue(employee1,ceo,invoiceManager);
 
 
         }

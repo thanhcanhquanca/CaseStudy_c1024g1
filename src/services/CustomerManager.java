@@ -14,9 +14,9 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
   private final List<Customer> customers = new ArrayList<>();
   private final INotifier notifier = new NotifierManager();
 
-
     private static final String ID_REGEX = "^[A-Za-z0-9]{5,10}$";
     private static final String EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+
 
     private boolean validateId(String id){
 
@@ -58,7 +58,6 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
 
             notifier.notifyEmployee("khách hàng " + item.getIdCustomer() + "đã được thêm vào hệ thống");
             notifier.notifyCustomer("Bạn  " + item.getIdCustomer() + "đã được tạo thành công tài khoản");
-
 
 
         } catch (RuntimeException e) {

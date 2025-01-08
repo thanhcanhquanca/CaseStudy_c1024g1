@@ -3,6 +3,8 @@ package services;
 import model.Booking;
 import model.Customer;
 import model.Room;
+import notify.INotifier;
+import notify.NotifierManager;
 
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -12,6 +14,8 @@ public class BookingManager implements IBookingManager {
    private final List<Booking> bookings = new ArrayList<>();
    private final CustomerManager customerManager;
    private final RoomManager roomManager;
+    private final INotifier notifier = new NotifierManager();
+
 
     public BookingManager(CustomerManager customerManager, RoomManager roomManager) {
         this.customerManager = customerManager;
@@ -54,8 +58,8 @@ public class BookingManager implements IBookingManager {
             room.setStatus(true);
             System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
 
-
-
+            notifier.notifyCustomer("khách hàng" + booking.getCustomerID() + " thuê phòng "+
+                    booking.getRoomId() + " trong khoảng  " +  daysStayed + " giá là  : " + booking.getTotalPrice());
 
         } catch (Exception e) {
             throw new RuntimeException(e);
@@ -114,7 +118,6 @@ public class BookingManager implements IBookingManager {
             }
         }
     }
-
 
 
 }

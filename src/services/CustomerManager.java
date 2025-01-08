@@ -56,8 +56,8 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
             customers.add(item);
             System.out.println("thêm khách hàng thành công" + item.getIdCustomer());
 
-            notifier.notifyEmployee("khách hàng " + item.getIdCustomer() + "đã được thêm vào hệ thống");
-            notifier.notifyCustomer("Bạn  " + item.getIdCustomer() + "đã được tạo thành công tài khoản");
+            notifier.notifyEmployee("khách hàng " + item.getIdCustomer() + " đã được thêm vào hệ thống");
+            notifier.notifyCustomer("Chúc mừng, tài khoản của bạn " + item.getIdCustomer() + " đã được tạo thành công!");
 
 
         } catch (RuntimeException e) {
@@ -164,7 +164,5 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
             System.err.println("Lỗi khi đọc tệp : " + e.getMessage());
         }
     }
-
-
 
 }

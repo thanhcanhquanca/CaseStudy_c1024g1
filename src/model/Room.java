@@ -2,14 +2,12 @@ package model;
 
 public class Room {
     private String roomId;
-    private String type;
-    private int pricePerDay;
+    private RoomType type;
     private boolean isStatus;
 
-    public Room(String roomId, String type, int pricePerDay, boolean isStatus) {
+    public Room(String roomId, RoomType type, boolean isStatus) {
         this.roomId = roomId;
         this.type = type;
-        this.pricePerDay = pricePerDay;
         this.isStatus = isStatus;
     }
 
@@ -21,20 +19,12 @@ public class Room {
         this.roomId = roomId;
     }
 
-    public String getType() {
+    public RoomType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(RoomType type) {
         this.type = type;
-    }
-
-    public int getPricePerDay() {
-        return pricePerDay;
-    }
-
-    public void setPricePerDay(int pricePerDay) {
-        this.pricePerDay = pricePerDay;
     }
 
     public boolean isStatus() {
@@ -43,15 +33,5 @@ public class Room {
 
     public void setStatus(boolean status) {
         isStatus = status;
-    }
-
-    @Override
-    public String toString() {
-        return "Room{" +
-                "roomId='" + roomId + '\'' +
-                ", type='" + type + '\'' +
-                ", pricePerDay=" + pricePerDay +
-                ", isStatus=" + isStatus +
-                '}';
     }
 }

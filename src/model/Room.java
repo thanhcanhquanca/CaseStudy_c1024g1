@@ -1,5 +1,7 @@
 package model;
 
+import enums.RoomType;
+
 public class Room {
     private String roomId;
     private RoomType type;

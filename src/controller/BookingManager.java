@@ -47,7 +47,7 @@ public class BookingManager implements IBookingManager {
 
         int pricePerDay = room.getType().getPrice();
         booking.setTotalPrice(daysStayed * pricePerDay);
-        
+
         bookings.add(booking);
         room.setStatus(true);
         System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
@@ -106,5 +106,7 @@ public class BookingManager implements IBookingManager {
             }
         }
     }
+
+
 
 }

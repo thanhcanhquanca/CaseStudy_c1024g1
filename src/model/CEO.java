@@ -31,4 +31,8 @@ public class CEO extends Person{
                 + getEmail() + ", phoneNumber : " + getPhoneNumber() + ", department : " + getDepartment() + ", position : " + getPosition() + '}';
 
     }
+
+    public void receiveRevenue(double totalRevenue) {
+        System.out.println("Giám đốc nhận được báo cáo doanh thu: " + totalRevenue);
+    }
 }

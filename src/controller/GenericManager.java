@@ -11,6 +11,5 @@ public interface GenericManager<T> {
     void sort();
     T searchById(String id);
     void displayAll(T item);
-    void readFromFile();
-    void writeToFile();
+
 }

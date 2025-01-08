@@ -1,12 +1,14 @@
 package controller;
 
+import model.Customer;
 import model.Room;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class RoomManager implements GenericManager<Room>{
+public class RoomManager implements GenericManager<Room>, IGenericFile {
     private final List<Room> rooms = new ArrayList<Room>();
 
     @Override
@@ -80,13 +82,33 @@ public class RoomManager implements GenericManager<Room>{
 
     @Override
     public void readFromFile() {
-
+        File file = new File("rooms.txt");
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
+            objectOutputStream.writeObject(rooms);
+            System.out.println("Dữ liệu đã được ghi vào tệ txt");
+        } catch (IOException e) {
+            System.err.println("Lỗi khi ghi tệp : " + e.getMessage());
+        }
     }
 
     @Override
     public void writeToFile() {
+        File file = new File("rooms.txt");
+        if (!file.exists()) {
+            System.out.println("Tệp không tồn tại ");
+            return;
+        }
 
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
+            List<Room> loadedCustomers = (List<Room>) objectInputStream.readObject();
+            rooms.clear();
+            rooms.addAll(loadedCustomers);
+            System.out.println("đã đọc file vào tệp  ");
+        } catch (IOException | ClassNotFoundException e) {
+            System.err.println("Lỗi khi đọc tệp : " + e.getMessage());
+        }
     }
-
 
 }

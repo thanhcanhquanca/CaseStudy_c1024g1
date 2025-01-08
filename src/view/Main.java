@@ -1,9 +1,7 @@
 package view;
 
-import controller.BookingManager;
-import controller.CustomerManager;
-import controller.InvoiceManager;
-import controller.RoomManager;
+import controller.*;
+import enums.RoomType;
 import model.*;
 
 import java.time.LocalDate;
@@ -13,7 +11,7 @@ public class Main {
 
             //  CEO sử dụng Singleton
             CEO ceo = CEO.getInstance("34","Huyển",45,"email@Ggmail.com","897398323","Giám đốc", "quản lý toàn bộ ");
-            CEO ceo1 = CEO.getInstance("34","Trang",45,"email@Ggmail.com","897398323","Giám đốc", "quản lý toàn bộ ");
+            CEO ceo1 = CEO.getInstance("34","NGưu",45,"email@Ggmail.com","897398323","Giám đốc", "quản lý toàn bộ ");
             System.out.println(ceo);
             System.out.println(ceo1);
 
@@ -24,7 +22,7 @@ public class Main {
             customerManager.add(customer1);
             customerManager.add(customer2);
 
-            // khởi tạo phòng mặc định với giá phòng có sử dụng Factory và
+            // khởi tạo phòng mặc định với giá phòng có sử dụng Factory và Proxy Pattern
             RoomManager roomManager = new RoomManager();
             roomManager.add(new Room("R001", RoomType.VIP, false));
             roomManager.add(new Room("R002", RoomType.DELUXE, false));
@@ -37,6 +35,7 @@ public class Main {
             BookingManager bookingManager = new BookingManager(customerManager, roomManager);
             Booking booking1 = new Booking("BOO1", "C00001", "R001", LocalDate.of(2025, 1, 10), LocalDate.of(2025, 1, 15), 0);
             Booking booking2 = new Booking("B002", "C00002", "R002", LocalDate.of(2025, 1, 12), LocalDate.of(2025, 1, 14), 0);
+
 
             bookingManager.addBooking(booking1);
             bookingManager.addBooking(booking2);
@@ -62,6 +61,16 @@ public class Main {
             InvoiceManager invoiceManager = new InvoiceManager(bookingManager);
             double totalRevenue = invoiceManager.calculateTotalRevenue();
             System.out.println("Tổng doanh thu từ tất cả đặt phòng: " + totalRevenue);
+
+
+            // nhân viên
+            Employee employee = new Employee("2", "Jane Smith", 30, "employee@company.com", "987654321", "Sales", "Manager");
+
+
+            // Yêu cầu báo cáo doanh thu từ Employee, sau đó gửi cho CEO
+            ManagerReportable managerReportable = new ManagerReportable();
+            managerReportable.requestTotalRevenue(employee,ceo,invoiceManager);
+
 
         }
 }

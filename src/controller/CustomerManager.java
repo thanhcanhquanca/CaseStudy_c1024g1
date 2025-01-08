@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class CustomerManager implements GenericManager<Customer> {
+public class CustomerManager implements GenericManager<Customer>, IGenericFile {
   private final List<Customer> customers = new ArrayList<>();
 
     private static final String ID_REGEX = "^[A-Za-z0-9]{5,10}$";
@@ -111,62 +111,31 @@ public class CustomerManager implements GenericManager<Customer> {
     @Override
     public void writeToFile() {
         File file = new File("customers.txt");
-        FileOutputStream fileOutputStream = null;
-        ObjectOutputStream objectOutputStream = null;
-
-        try {
-            fileOutputStream = new FileOutputStream(file);
-            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        try (FileOutputStream fileOutputStream = new FileOutputStream(file);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream)) {
             objectOutputStream.writeObject(customers);
-            System.out.println("Dữ liệu đã được ghi vào tệp txt");
+            System.out.println("Dữ liệu đã được ghi vào tệ txt");
         } catch (IOException e) {
-            System.err.println("Lỗi khi ghi tệp: " + e.getMessage());
-        } finally {
-            try {
-                if (objectOutputStream != null) {
-                    objectOutputStream.close();
-                }
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-            } catch (IOException e) {
-                System.err.println("Lỗi khi đóng tệp: " + e.getMessage());
-            }
+            System.err.println("Lỗi khi ghi tệp : " + e.getMessage());
         }
     }
-
 
     @Override
     public void readFromFile() {
         File file = new File("customers.txt");
         if (!file.exists()) {
-            System.out.println("Tệp không tồn tại");
+            System.out.println("Tệp không tồn tại ");
             return;
         }
 
-        FileInputStream fileInputStream = null;
-        ObjectInputStream objectInputStream = null;
-
-        try {
-            fileInputStream = new FileInputStream(file);
-            objectInputStream = new ObjectInputStream(fileInputStream);
+        try (FileInputStream fileInputStream = new FileInputStream(file);
+             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream)) {
             List<Customer> loadedCustomers = (List<Customer>) objectInputStream.readObject();
             customers.clear();
             customers.addAll(loadedCustomers);
-            System.out.println("Đã đọc dữ liệu từ tệp");
+            System.out.println("đã đọc file vào tệp  ");
         } catch (IOException | ClassNotFoundException e) {
-            System.err.println("Lỗi khi đọc tệp: " + e.getMessage());
-        } finally {
-            try {
-                if (objectInputStream != null) {
-                    objectInputStream.close();
-                }
-                if (fileInputStream != null) {
-                    fileInputStream.close();
-                }
-            } catch (IOException e) {
-                System.err.println("Lỗi khi đóng tệp: " + e.getMessage());
-            }
+            System.err.println("Lỗi khi đọc tệp : " + e.getMessage());
         }
     }
 

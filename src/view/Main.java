@@ -65,7 +65,7 @@ public class Main {
 
             // nhân viên
             Employee employee = new Employee("2", "Jane Smith", 30, "employee@company.com", "987654321", "Sales", "Manager");
-
+            Employee employee1 = new Employee("3", "BRdmith", 10, "emplosde@company.com", "987654321", "Sales", "Manager");
 
             // Yêu cầu báo cáo doanh thu từ Employee, sau đó gửi cho CEO
             ManagerReportable managerReportable = new ManagerReportable();

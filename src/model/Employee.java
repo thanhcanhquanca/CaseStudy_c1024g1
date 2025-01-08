@@ -1,5 +1,6 @@
 package model;
 
+
 public class Employee extends Person{
     private String role;
 
@@ -22,4 +23,6 @@ public class Employee extends Person{
                 "role='" + role + '\'' +
                 '}';
     }
+
+
 }

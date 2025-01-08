@@ -55,6 +55,8 @@ public class BookingManager implements IBookingManager {
             System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
 
 
+
+
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

@@ -1,5 +1,7 @@
 package view;
 
+import error.RoomError;
+import error.RoomErrorManager;
 import notify.INotifier;
 import notify.NotifierManager;
 import services.*;
@@ -80,6 +82,14 @@ public class Main {
             // Yêu cầu báo cáo doanh thu từ Staff, sau đó gửi cho CEO
             ManagerReportable managerReportable = new ManagerReportable();
             managerReportable.requestTotalRevenue(staff1,ceo,invoiceManager);
+
+
+            RoomErrorManager roomErrorManager = new RoomErrorManager();
+            RoomError roomError = new RoomError("No_1","NoB001","723","BayLy","điều hoa hỏng rồi",LocalDate.of(2025, 1, 15) , false );
+            roomErrorManager.addError(roomError);
+            roomErrorManager.displayErrors();
+
+
 
 
         }

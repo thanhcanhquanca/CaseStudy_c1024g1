@@ -1,9 +1,9 @@
 package services;
 
+import error.ErrorHandler;
 import model.Customer;
 import notify.NotifierManager;
 import notify.INotifier;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -37,19 +37,16 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
     public void add(Customer item) {
         try {
             if (!validateId(item.getIdCustomer())){
-                System.out.println("ID không hợp lệ , ID phải từ 5 - 10 ký tự chỉ chứa chữ và số");
-                return;
+                throw new IllegalArgumentException(" ID không hợp lệ, ID phải từ 5 - 10 ký tự chỉ chứa chữ và số .");
             }
 
             if (!validateEmail(item.getEmailCustomer())){
-                System.out.println("email không hợp lệ , vui lòng nhập email đúng định dạng");
-                return;
+                throw new IllegalArgumentException(" ID không hợp lệ, ID phải từ 5 - 10 ký tự chỉ chứa chữ và số .");
             }
 
             for (Customer customer : customers) {
                 if (customer.getIdCustomer().equals(item.getIdCustomer())) {
-                    System.out.println(" khách hàng đã tồn tại " + item.getIdCustomer() + "đã tồn tại") ;
-                    return;
+                    throw new IllegalArgumentException("Khách hàng đã tồn tại với ID: " + item.getIdCustomer());
                 }
             }
 
@@ -60,8 +57,8 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
             notifier.notifyCustomer("Chúc mừng, tài khoản của bạn " + item.getIdCustomer() + " đã được tạo thành công!");
 
 
-        } catch (RuntimeException e) {
-            throw new RuntimeException(e);
+        } catch (IllegalArgumentException e) {
+            ErrorHandler.notifyUsers("Lỗi: " + e.getMessage());
         }
     }
 

@@ -1,9 +1,9 @@
 package services;
 
 import model.CEO;
-import model.Employee;
+import model.Staff;
 
 public interface IGenericReportable {
-    void requestTotalRevenue(Employee employee , CEO ceo , InvoiceManager invoiceManager);
+    void requestTotalRevenue(Staff staff, CEO ceo , InvoiceManager invoiceManager);
 
 }

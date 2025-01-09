@@ -19,13 +19,13 @@ public class Main {
 
 
             INotifier notifier = new NotifierManager();
-            IGenericEmployeeManager employeeManager = new EmployeeManager(notifier);
+            IGenericStaffManager employeeManager = new StaffManager(notifier);
 
-            Employee employee1 = new Employee("1", "John Doe", 30, "john@example.com", "123456789", "IT", "Developer");
-            Employee employee2 = new Employee("2", "Jane Doe", 28, "jane@example.com", "987654321", "HR", "Manager");
+            Staff staff1 = new Staff("1", "John Doe", 30, "john@example.com", "123456789", "IT", "Developer");
+            Staff staff2 = new Staff("2", "Jane Doe", 28, "jane@example.com", "987654321", "HR", "Manager");
 
-            employeeManager.addEmployee(employee1);
-            employeeManager.addEmployee(employee2);
+            employeeManager.addEmployee(staff1);
+            employeeManager.addEmployee(staff2);
             employeeManager.notifyAllEmployees("Cập nhật mới từ hệ thống!");
 
             // khách hàng  có regex
@@ -77,9 +77,9 @@ public class Main {
 
 
 
-            // Yêu cầu báo cáo doanh thu từ Employee, sau đó gửi cho CEO
+            // Yêu cầu báo cáo doanh thu từ Staff, sau đó gửi cho CEO
             ManagerReportable managerReportable = new ManagerReportable();
-            managerReportable.requestTotalRevenue(employee1,ceo,invoiceManager);
+            managerReportable.requestTotalRevenue(staff1,ceo,invoiceManager);
 
 
         }

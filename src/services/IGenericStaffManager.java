@@ -1,13 +1,13 @@
 package services;
 
-import model.Employee;
+import model.Staff;
 
 import java.util.List;
 
-public interface IGenericEmployeeManager {
-    void addEmployee(Employee employee);
+public interface IGenericStaffManager {
+    void addEmployee(Staff staff);
     void removeEmployee(String employeeId);
-    List<Employee> getEmployees();
+    List<Staff> getEmployees();
     void notifyAllEmployees(String message);
     void notifyEmployeeById(String role, String message);
 }

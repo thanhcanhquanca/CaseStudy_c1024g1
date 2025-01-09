@@ -1,12 +1,12 @@
 package services;
 
 import model.CEO;
-import model.Employee;
+import model.Staff;
 
 public class ManagerReportable implements IGenericReportable{
 
     @Override
-    public void requestTotalRevenue(Employee employee, CEO ceo, InvoiceManager invoiceManager) {
+    public void requestTotalRevenue(Staff staff, CEO ceo, InvoiceManager invoiceManager) {
         double totalRevenue  = invoiceManager.calculateTotalRevenue();
         sendRevenueReport(ceo, totalRevenue );
     }

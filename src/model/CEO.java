@@ -27,7 +27,7 @@ public class CEO extends Person{
 
     @Override
     public String toString() {
-        return "CEO{" + "id : " + getId() + " , name : " + getName() + "age : " + getAge() + ", email : "
+        return "CEO{" + "id : " + getId() + " , name : " + getName() + " age : " + getAge() + ", email : "
                 + getEmail() + ", phoneNumber : " + getPhoneNumber() + ", department : " + getDepartment() + ", position : " + getPosition() + '}';
 
     }

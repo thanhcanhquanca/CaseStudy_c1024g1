@@ -13,6 +13,15 @@ public class Room {
         this.isStatus = isStatus;
     }
 
+    @Override
+    public String toString() {
+        return "Room{" +
+                "roomId='" + roomId + '\'' +
+                ", type=" + type +
+                ", isStatus=" + isStatus +
+                '}';
+    }
+
     public String getRoomId() {
         return roomId;
     }

@@ -10,4 +10,5 @@ public interface IGenericStaffManager {
     List<Staff> getEmployees();
     void notifyAllEmployees(String message);
     void notifyEmployeeById(String role, String message);
+    void displayAllEmployees();
 }

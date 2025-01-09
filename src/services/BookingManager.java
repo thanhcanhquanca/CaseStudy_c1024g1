@@ -14,7 +14,7 @@ public class BookingManager implements IBookingManager {
    private final List<Booking> bookings = new ArrayList<>();
    private final CustomerManager customerManager;
    private final RoomManager roomManager;
-    private final INotifier notifier = new NotifierManager();
+   private final INotifier notifier = new NotifierManager();
 
 
     public BookingManager(CustomerManager customerManager, RoomManager roomManager) {
@@ -56,10 +56,10 @@ public class BookingManager implements IBookingManager {
 
             bookings.add(booking);
             room.setStatus(true);
-            System.out.println("đặt phòng thành công ,  Tổng Tiền :" + booking.getTotalPrice());
+
 
             notifier.notifyCustomer("khách hàng" + booking.getCustomerID() + " thuê phòng "+
-                    booking.getRoomId() + " trong khoảng  " +  daysStayed + " giá là  : " + booking.getTotalPrice());
+                    booking.getRoomId() + " tổng ngày đặt là " +  daysStayed + " giá là  : " + booking.getTotalPrice());
 
         } catch (Exception e) {
             throw new RuntimeException(e);

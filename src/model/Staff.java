@@ -19,10 +19,7 @@ public class Staff extends Person{
 
     @Override
     public String toString() {
-        return "Staff{" +
-                "role='" + role + '\'' +
-                '}';
+        return "Staff{" + "id : " + getId() + " , name : " + getName() + " age : " + getAge() + ", email : "
+                + getEmail() + ", phoneNumber : " + getPhoneNumber() + ", department : " + getDepartment() + ", role : " + role + '}';
     }
-
-
 }

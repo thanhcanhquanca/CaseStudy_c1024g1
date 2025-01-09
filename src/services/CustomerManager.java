@@ -37,24 +37,23 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
     public void add(Customer item) {
         try {
             if (!validateId(item.getIdCustomer())){
-                throw new IllegalArgumentException(" ID không hợp lệ, ID phải từ 5 - 10 ký tự chỉ chứa chữ và số .");
+                throw new IllegalArgumentException(" nhập email không hợp lệ từ 5 - 10 ký tự chỉ chứa chữ và số ");
             }
 
             if (!validateEmail(item.getEmailCustomer())){
-                throw new IllegalArgumentException(" ID không hợp lệ, ID phải từ 5 - 10 ký tự chỉ chứa chữ và số .");
+                throw new IllegalArgumentException(" nhập email không hợp lệ từ 5 - 10 ký tự chỉ chứa chữ và số ");
             }
 
             for (Customer customer : customers) {
                 if (customer.getIdCustomer().equals(item.getIdCustomer())) {
-                    throw new IllegalArgumentException("Khách hàng đã tồn tại với ID: " + item.getIdCustomer());
+                    throw new IllegalArgumentException(" Khách hàng đã tồn tại với ID : " + item.getIdCustomer());
                 }
             }
 
             customers.add(item);
-            System.out.println("thêm khách hàng thành công" + item.getIdCustomer());
 
             notifier.notifyEmployee("khách hàng " + item.getIdCustomer() + " đã được thêm vào hệ thống");
-            notifier.notifyCustomer("Chúc mừng, tài khoản của bạn " + item.getIdCustomer() + " đã được tạo thành công!");
+            notifier.notifyCustomer("Chúc mừng, tài khoản của bạn " + item.getIdCustomer() + " đã được tạo thành công");
 
 
         } catch (IllegalArgumentException e) {
@@ -125,7 +124,7 @@ public class CustomerManager implements GenericManager<Customer>, IGenericFile {
     }
 
     @Override
-    public void displayAll(Customer item) {
+    public void displayAll() {
         for (Customer customer : customers) {
             System.out.println(customer);
         }

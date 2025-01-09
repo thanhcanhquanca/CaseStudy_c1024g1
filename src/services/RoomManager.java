@@ -74,11 +74,10 @@ public class RoomManager implements GenericManager<Room>, IGenericFile {
     }
 
     @Override
-    public void displayAll(Room item) {
+    public void displayAll() {
         for (Room room : rooms) {
-            if (room.getRoomId().equals(item.getRoomId())) {
                 System.out.println(room);
-            }
+
         }
 
     }

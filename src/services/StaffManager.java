@@ -51,4 +51,11 @@ public class StaffManager implements IGenericStaffManager {
             }
         }
     }
+
+    @Override
+    public void displayAllEmployees() {
+        for (Staff staff : this.staff) {
+            System.out.println(staff);
+        }
+    }
 }

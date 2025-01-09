@@ -9,6 +9,6 @@ public interface GenericManager<T> {
     void update(T item);
     void sort();
     T searchById(String id);
-    void displayAll(T item);
+    void displayAll();
 
 }

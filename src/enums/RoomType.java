@@ -14,4 +14,9 @@ public enum RoomType {
     public int getPrice() {
         return price;
     }
+
+    @Override
+    public String toString() {
+        return name() + " (Giá: " + price + " VND)";
+    }
 }

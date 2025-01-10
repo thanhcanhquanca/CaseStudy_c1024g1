@@ -1,6 +1,6 @@
 package services;
 
-import error.ErrorHandler;
+import exception.ErrorHandler;
 import model.Customer;
 import notify.NotifierManager;
 import notify.INotifier;

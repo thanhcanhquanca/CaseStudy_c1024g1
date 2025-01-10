@@ -1,4 +1,4 @@
-package error;
+package exception;
 
 public class ErrorHandler {
     public static void logError(String action, Exception e) {

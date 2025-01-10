@@ -1,7 +1,7 @@
 package view;
 
-import error.RoomError;
-import error.RoomErrorManager;
+import exception.RoomError;
+import exception.RoomErrorManager;
 import notify.INotifier;
 import notify.NotifierManager;
 import services.*;
@@ -19,7 +19,7 @@ public class Main {
             System.out.println(ceo);
 
             System.out.println("____________ Khởi tạo nhân viên  *_*_______________");
-            // Thông báo và khởi tạo nhân viên
+            // Thông báo và khởi tạo nhân viên Observer Pattern
             INotifier notifier = new NotifierManager();
             IGenericStaffManager staffManager = new StaffManager(notifier);
 
@@ -70,7 +70,7 @@ public class Main {
 
             System.out.println("______________ khởi tạo phòng *_*__________________");
 
-            // khởi tạo phòng mặc định với giá phòng có sử dụng Factory và Proxy Pattern
+            // khởi tạo phòng mặc định với giá phòng có sử dụng Factory
             RoomManager roomManager = new RoomManager();
             roomManager.add(new Room("R0001", RoomType.VIP, false));
             roomManager.add(new Room("R0002", RoomType.DELUXE, false));

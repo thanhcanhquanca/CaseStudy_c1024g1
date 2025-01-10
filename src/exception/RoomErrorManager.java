@@ -1,4 +1,4 @@
-package error;
+package exception;
 
 import java.util.ArrayList;
 import java.util.List;
